@@ -17,7 +17,6 @@ export const SignUpPage = () => {
       password,
     });
     const { token } = response.data;
-    console.log(token);
     setToken(token);
     history.push("/");
   };
