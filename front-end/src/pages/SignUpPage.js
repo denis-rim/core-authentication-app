@@ -34,6 +34,7 @@ export const SignUpPage = () => {
         value={confirmPassword}
         onChange={(e) => setConfirmPassword(e.target.value)}
       />
+      <hr />
       <button
         onClick={onSignupClicked}
         disabled={
