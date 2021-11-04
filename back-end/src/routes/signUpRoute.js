@@ -31,5 +31,24 @@ export const signUpRoute = {
     });
 
     const { insertedId } = result;
+
+    jwt.sign(
+      {
+        id: insertedId,
+        email,
+        info: startingInfo,
+        isVerified: false,
+      },
+      process.env.JWT_SECRET,
+      {
+        expiresIn: "30d",
+      },
+      (err, token) => {
+        if (err) {
+          return res.status(500).send(err);
+        }
+        res.status(200).json({ token });
+      }
+    );
   },
 };
