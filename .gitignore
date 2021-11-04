@@ -2,6 +2,8 @@
 
 # dependencies
 */node_modules
+/back-end/.env
+.idea
 /.pnp
 .pnp.js
 
