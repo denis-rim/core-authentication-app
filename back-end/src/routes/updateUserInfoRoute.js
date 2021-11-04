@@ -1,3 +1,4 @@
+import jwt from "jsonwebtoken";
 import { ObjectID } from "mongodb";
 import { getDbConnection } from "../db";
 
@@ -9,8 +10,11 @@ export const updateUserInfoRoute = {
     const { userId } = req.params;
 
     // extract exact values from request body
-    const updates = ({ favoriteFood, hairColor, bio }) =>
-      ({ favoriteFood, hairColor, bio }(req.body));
+    const updates = (({ favoriteFood, hairColor, bio }) => ({
+      favoriteFood,
+      hairColor,
+      bio,
+    }))(req.body);
 
     if (!authorization) {
       return res.status(401).json({ message: "No authorization header send" });
