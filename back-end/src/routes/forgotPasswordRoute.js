@@ -15,8 +15,6 @@ export const forgotPasswordRoute = {
       .collection("users")
       .updateOne({ email }, { $set: { passwordResetCode } });
 
-    console.log(result);
-
     if (result.nModified > 0) {
       try {
         await sendEmail({
