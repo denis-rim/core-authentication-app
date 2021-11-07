@@ -15,12 +15,13 @@ export const LoginPage = () => {
     const loadGoogleOauthUrl = async () => {
       try {
         const response = await axios.get("/auth/google/url");
+        console.log(response.data);
         setGoogleOauthUrl(response.data.url);
       } catch (error) {
         console.log(error);
       }
-      loadGoogleOauthUrl();
     };
+    loadGoogleOauthUrl();
   }, []);
 
   const onLoginClicked = async () => {
@@ -61,7 +62,7 @@ export const LoginPage = () => {
       </button>
       <button
         disabled={!googleOauthUrl}
-        onClick={() => (window.local.href = googleOauthUrl)}
+        onClick={() => (window.location.href = googleOauthUrl)}
       >
         Log in with Google
       </button>
