@@ -2,20 +2,29 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useToken } from "../auth/useToken";
+import { useQueryParams } from "../util/useQueryParams";
 
 export const LoginPage = () => {
-  const [token, setToken] = useToken();
+  const [, setToken] = useToken();
   const history = useHistory();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [googleOauthUrl, setGoogleOauthUrl] = useState("");
+  const { token: oauthToken } = useQueryParams();
+
+  useEffect(() => {
+    if (oauthToken) {
+      // If there's a token, that means we were just redirected back here from Oauth
+      setToken(oauthToken);
+      history.push("/");
+    }
+  }, [oauthToken, setToken, history]);
 
   useEffect(() => {
     const loadGoogleOauthUrl = async () => {
       try {
         const response = await axios.get("/auth/google/url");
-        console.log(response.data);
         setGoogleOauthUrl(response.data.url);
       } catch (error) {
         console.log(error);
