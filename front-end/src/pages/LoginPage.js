@@ -4,6 +4,8 @@ import { useHistory } from "react-router-dom";
 import { useToken } from "../auth/useToken";
 import { useQueryParams } from "../util/useQueryParams";
 
+// Amazon
+
 export const LoginPage = () => {
   const [, setToken] = useToken();
   const history = useHistory();
